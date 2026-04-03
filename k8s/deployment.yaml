@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phishguard-api
+  labels:
+    app: phishguard
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: phishguard
+  template:
+    metadata:
+      labels:
+        app: phishguard
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: phishguard
+        image: phishguard-api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: "production"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/soc/threat-level
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /api/soc/threat-level
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: app-logs
+          mountPath: /app/logs
+        - name: app-artifacts
+          mountPath: /app/artifacts
+      volumes:
+      - name: app-logs
+        emptyDir: {}
+      - name: app-artifacts
+        persistentVolumeClaim:
+          claimName: phishguard-artifacts-pvc

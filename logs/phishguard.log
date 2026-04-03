@@ -425,3 +425,375 @@
 2026-04-03 17:09:49,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:09:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
 2026-04-03 17:09:50,003 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\services\\soc_logger.py', reloading
 2026-04-03 17:09:50,003 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\services\\soc_logger.py', reloading
+2026-04-03 17:09:50,425 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:09:50,426 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:09:52,027 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:09:52,027 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:09:52,027 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:09:52,027 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:09:52,027 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:09:52,028 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:09:52,028 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:09:52,028 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:09:52,028 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:09:52,028 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:09:52,034 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:09:52,037 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:09:52,037 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:09:52,040 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:09:59,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:09:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:10:01,260 | INFO    | phishguard.app | Analyzing URL: https://paypa1.com/login (session: b57f3921)
+2026-04-03 17:10:01,281 | INFO    | phishguard.threat_intel | ThreatIntel | paypa1.com | blacklisted=False reputation=0.70 age=254d score=0
+2026-04-03 17:10:01,282 | WARNING | phishguard.brand_spoof | Brand spoofing detected | brand=PayPal type=homoglyph similarity=0.83 domain=paypa1.com
+2026-04-03 17:10:01,282 | INFO    | phishguard.soc | SOC [INFO] URL Scanned (Score: 29) | URL analyzed. Risk level: LOW. No immediate threat.
+2026-04-03 17:10:01,282 | WARNING | phishguard.soc | SOC [WARNING] Brand Spoofing: PayPal | Domain uses look-alike characters to mimic PayPal (similarity: 83%)
+2026-04-03 17:10:01,282 | INFO    | phishguard.detector | Analysis | https://paypa1.com/login | score=29 level=LOW action=allow [R:8 ML:0 TI:0 AN:0 SP:20]
+2026-04-03 17:10:01,283 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:10:01] "POST /analyze HTTP/1.1" 200 -
+2026-04-03 17:10:09,073 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:10:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:10:19,085 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:10:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:10:29,081 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:10:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:10:39,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:10:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:10:49,083 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:10:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:10:59,084 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:10:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:11:09,083 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:11:19,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:11:29,079 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:11:39,079 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:11:49,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:11:50,130 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:50] "GET / HTTP/1.1" 200 -
+2026-04-03 17:11:50,230 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:50] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-04-03 17:11:50,234 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:50] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-04-03 17:11:59,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:11:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:00,329 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:09,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:10,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:19,072 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:20,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:29,083 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:30,322 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:39,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:40,320 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:49,084 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:50,318 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:12:59,073 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:12:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:00,319 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:09,082 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:10,330 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:19,082 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:20,332 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:29,079 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:30,328 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:39,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:40,326 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:49,078 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:50,328 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:13:59,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:13:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:00,324 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:09,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:10,325 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:19,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:20,324 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:29,073 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:30,322 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:39,072 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:40,322 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:49,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:50,319 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:14:59,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:14:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:00,319 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:09,084 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:10,318 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:19,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:20,326 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:29,082 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:30,325 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:39,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:40,328 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:49,078 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:50,331 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:15:59,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:15:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:00,329 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:09,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:10,321 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:12,550 | INFO    | phishguard.app | Analyzing URL: http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123 (session: 08385352)
+2026-04-03 17:16:12,551 | INFO    | phishguard.threat_intel | ThreatIntel | 192.168.1.1 | blacklisted=False reputation=0.55 age=92d score=15
+2026-04-03 17:16:12,552 | CRITICAL | phishguard.soc | SOC [CRITICAL] CRITICAL THREAT DETECTED (Score: 83) | URL flagged as HIGH. Action: block. Immediate attention required.
+2026-04-03 17:16:12,552 | INFO    | phishguard.detector | Analysis | http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123 | score=83 level=HIGH action=block [R:91 ML:100 TI:15 AN:0 SP:0]
+2026-04-03 17:16:12,552 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:12] "POST /analyze HTTP/1.1" 200 -
+2026-04-03 17:16:19,083 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:20,320 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:26,444 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:26] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:26,446 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:26] "GET /api/soc/events?limit=30 HTTP/1.1" 200 -
+2026-04-03 17:16:29,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:30,325 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:39,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:40,325 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:40,907 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:40] "POST /api/simulate HTTP/1.1" 200 -
+2026-04-03 17:16:43,976 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:43] "GET /api/quiz/generate?difficulty=medium&count=5 HTTP/1.1" 200 -
+2026-04-03 17:16:49,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:50,322 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:16:50,891 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:50] "POST /api/quiz/evaluate HTTP/1.1" 200 -
+2026-04-03 17:16:59,083 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:16:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:00,321 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:09,072 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:10,321 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:12,832 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:12] "POST /api/quiz/evaluate HTTP/1.1" 200 -
+2026-04-03 17:17:19,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:20,319 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:29,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:30,324 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:33,018 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:33] "POST /api/quiz/evaluate HTTP/1.1" 200 -
+2026-04-03 17:17:39,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:40,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:45,619 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:45] "POST /api/quiz/evaluate HTTP/1.1" 200 -
+2026-04-03 17:17:49,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:50,326 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:17:59,081 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:17:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:00,330 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:09,085 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:10,329 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:13,564 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:13] "GET /api/quiz/generate?difficulty=medium&count=5 HTTP/1.1" 200 -
+2026-04-03 17:18:19,079 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:20,052 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:20] "POST /api/quiz/evaluate HTTP/1.1" 200 -
+2026-04-03 17:18:20,329 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:23,645 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:23] "POST /api/quiz/evaluate HTTP/1.1" 200 -
+2026-04-03 17:18:28,232 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:28] "POST /api/quiz/evaluate HTTP/1.1" 200 -
+2026-04-03 17:18:29,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:30,327 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:31,797 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:31] "POST /api/quiz/evaluate HTTP/1.1" 200 -
+2026-04-03 17:18:39,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:40,325 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:49,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:50,324 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:18:59,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:18:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:00,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:09,073 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:10,324 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:19,077 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:20,321 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:29,084 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:30,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:39,087 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:40,320 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:49,082 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:50,319 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:19:59,081 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:19:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:00,333 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:09,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:10,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:19,073 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:20,330 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:29,078 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:30,326 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:39,078 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:40,328 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:49,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:50,325 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:20:59,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:20:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:00,325 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:09,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:10,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:19,073 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:20,322 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:29,072 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:30,322 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:39,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:40,322 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:49,084 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:50,320 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:21:59,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:21:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:00,319 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:09,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:10,327 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:19,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:20,330 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:29,077 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:30,318 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:39,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:40,326 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:40,975 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\model.py', reloading
+2026-04-03 17:22:41,379 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:22:41,437 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:22:42,939 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:22:42,939 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:22:42,939 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:22:42,939 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:22:42,939 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:22:42,948 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:22:42,949 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:22:42,955 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:22:42,955 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:22:42,955 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:22:42,955 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:22:42,955 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:22:42,964 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:22:42,966 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:22:49,081 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:50,324 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:22:59,084 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:22:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:00,326 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:09,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:10,325 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:19,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:20,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:21,625 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\model.py', reloading
+2026-04-03 17:23:22,099 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:23:22,117 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:23:24,032 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:23:24,033 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:23:24,033 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:23:24,033 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:23:24,033 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:23:24,033 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:23:24,034 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:23:24,034 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:23:24,034 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:23:24,034 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:23:24,041 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:23:24,043 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:23:24,043 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:23:24,045 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:23:29,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:30,318 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:32,874 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py', reloading
+2026-04-03 17:23:32,874 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py', reloading
+2026-04-03 17:23:33,288 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:23:33,296 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:23:34,908 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:23:34,908 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:23:34,908 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:23:34,908 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:23:34,908 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:23:34,909 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:23:34,910 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:23:34,910 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:23:34,910 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:23:34,910 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:23:34,916 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:23:34,918 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:23:34,918 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:23:34,920 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:23:39,088 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:40,323 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:41,555 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\model.py', reloading
+2026-04-03 17:23:41,937 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:23:41,975 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:23:43,748 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:23:43,749 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:23:43,749 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:23:43,749 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:23:43,749 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:23:43,758 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:23:43,761 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:23:43,764 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:23:43,764 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:23:43,764 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:23:43,764 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:23:43,764 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:23:43,773 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:23:43,775 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:23:49,089 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:50,321 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:23:59,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:23:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:00,321 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:09,086 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:09,326 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\tests\\test_detector.py', reloading
+2026-04-03 17:24:09,326 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\tests\\test_detector.py', reloading
+2026-04-03 17:24:09,724 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:24:09,726 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:24:11,440 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:24:11,441 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:24:11,441 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:24:11,441 | INFO    | phishguard.detector | ML model loaded successfully.
+ | Detection engine initialized. All services operational.
+2026-04-03 17:24:11,441 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:24:11,441 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:24:11,441 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:24:11,441 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:24:11,449 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:24:11,451 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:24:11,452 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:24:11,455 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:24:11,464 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:11] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:19,083 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:20,318 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:29,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:30,329 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:39,082 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:40,333 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:49,078 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:50,329 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:50] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:24:56,412 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\wrapt\\__init__.py', reloading
+2026-04-03 17:24:56,412 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\wrapt\\__init__.py', reloading
+2026-04-03 17:24:56,872 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:24:56,879 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:24:58,529 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:24:58,529 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:24:58,529 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:24:58,529 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:24:58,529 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:24:58,529 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:24:58,529 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:24:58,529 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:24:58,529 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:24:58,537 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:24:58,538 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:24:58,538 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:24:58,540 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:24:59,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:24:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:00,328 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:00] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:09,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:10,328 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:10] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:14,085 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\anyio\\__init__.py', reloading
+2026-04-03 17:25:14,495 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:25:14,499 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:25:16,044 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:25:16,044 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:25:16,044 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:25:16,044 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:25:16,044 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:25:16,053 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:25:16,053 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:25:16,053 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:25:16,054 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:25:16,054 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:25:16,056 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:25:16,060 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:25:16,065 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:25:16,067 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:25:19,078 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:20,327 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:20] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:25,350 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\tests\\test_detector.py', reloading
+2026-04-03 17:25:25,794 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:25:25,813 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:25:27,430 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:25:27,430 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:25:27,430 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:25:27,430 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:25:27,430 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:25:27,430 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:25:27,430 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:25:27,430 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:25:27,430 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:25:27,438 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:25:27,438 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 17:25:27,440 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:25:27,440 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 17:25:29,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:30,321 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:30] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:39,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:40,320 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 17:25:40] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 17:25:43,239 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\app.py', reloading
+2026-04-03 17:25:43,239 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\app.py', reloading
+2026-04-03 17:25:43,617 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:25:43,618 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 17:25:45,205 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:25:45,205 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:25:45,205 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:25:45,205 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:25:45,205 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 17:25:45,211 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 17:25:45,211 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 17:25:45,211 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
+2026-04-03 17:25:45,211 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 17:25:45,211 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.

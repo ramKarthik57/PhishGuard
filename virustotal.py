@@ -10,8 +10,28 @@ from typing import Optional, Dict, Any
 from urllib.parse import quote
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 logger = logging.getLogger("phishguard.virustotal")
+
+# ──────────────────────────────────────────────
+# Resilient Session Factory
+# ──────────────────────────────────────────────
+
+def _get_resilient_session() -> requests.Session:
+    """Create a requests session with exponential backoff retries."""
+    session = requests.Session()
+    retries = Retry(
+        total=3,
+        backoff_factor=1,  # 1s, 2s, 4s wait
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET", "POST"]
+    )
+    adapter = HTTPAdapter(max_retries=retries)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
+    return session
 
 # ──────────────────────────────────────────────
 # Configuration
@@ -42,8 +62,10 @@ def check_virustotal(url: str) -> Optional[Dict[str, Any]]:
     headers = {"x-apikey": VT_API_KEY}
 
     try:
+        session = _get_resilient_session()
+        
         # Step 1: Submit URL for scanning
-        submit_resp = requests.post(
+        submit_resp = session.post(
             VT_URL_REPORT,
             headers=headers,
             data={"url": url},
@@ -53,8 +75,9 @@ def check_virustotal(url: str) -> Optional[Dict[str, Any]]:
         analysis_id = submit_resp.json()["data"]["id"]
 
         # Step 2: Poll analysis result
+        # Note: the VT API returns an 'id' that must be fetched separately
         analysis_url = f"https://www.virustotal.com/api/v3/analyses/{analysis_id}"
-        analysis_resp = requests.get(
+        analysis_resp = session.get(
             analysis_url,
             headers=headers,
             timeout=VT_TIMEOUT,

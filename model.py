@@ -13,9 +13,9 @@ from pathlib import Path
 from typing import List, Tuple, Optional
 
 import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import accuracy_score, classification_report, roc_auc_score, precision_score, recall_score, f1_score
 from sklearn.preprocessing import StandardScaler
 
 from utils import extract_features, features_to_vector
@@ -105,10 +105,10 @@ def generate_synthetic_dataset(n_legit: int = 500, n_phish: int = 500) -> Tuple[
 # ──────────────────────────────────────────────
 
 class PhishingClassifier:
-    """Thin wrapper around a scikit-learn Logistic Regression pipeline."""
+    """Thin wrapper around a scikit-learn Random Forest pipeline."""
 
     def __init__(self):
-        self.model: Optional[LogisticRegression] = None
+        self.model: Optional[RandomForestClassifier] = None
         self.scaler: Optional[StandardScaler] = None
 
     # ── train ────────────────────────────────
@@ -130,20 +130,33 @@ class PhishingClassifier:
         X_train = self.scaler.fit_transform(X_train)
         X_test = self.scaler.transform(X_test)
 
-        self.model = LogisticRegression(
-            max_iter=1000,
-            solver="lbfgs",
-            C=1.0,
+        self.model = RandomForestClassifier(
+            n_estimators=100,
+            max_depth=10,
+            class_weight="balanced",
             random_state=42,
         )
         self.model.fit(X_train, y_train)
 
         y_pred = self.model.predict(X_test)
+        y_prob = self.model.predict_proba(X_test)[:, 1]
+        
         acc = accuracy_score(y_test, y_pred)
+        roc_auc = roc_auc_score(y_test, y_prob)
+        cv_scores = cross_val_score(self.model, X, y, cv=5, scoring='accuracy')
+
         report = classification_report(y_test, y_pred, output_dict=True)
 
-        logger.info("Model accuracy: %.4f", acc)
-        return {"accuracy": round(acc, 4), "report": report}
+        logger.info(
+            "Model trained | Acc: %.4f | ROC/AUC: %.4f | CV Mean: %.4f (+/-%.4f)",
+            acc, roc_auc, cv_scores.mean(), cv_scores.std() * 2
+        )
+        return {
+            "accuracy": round(acc, 4), 
+            "roc_auc": round(roc_auc, 4),
+            "cv_mean": round(cv_scores.mean(), 4),
+            "report": report
+        }
 
     # ── predict ──────────────────────────────
     def predict_proba(self, feature_vector: List[float]) -> float:
@@ -194,4 +207,4 @@ if __name__ == "__main__":
     clf = PhishingClassifier()
     metrics = clf.train()
     clf.save()
-    print(f"\n✓ Training complete — accuracy: {metrics['accuracy']}")
+    print(f"\n[+] Training complete -- accuracy: {metrics['accuracy']}")

@@ -8,7 +8,7 @@ import uuid
 import logging
 from datetime import datetime
 
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, Response
 
 from config import config
 from detector import PhishGuardDetector
@@ -19,6 +19,11 @@ from services.soc_logger import SOCLogger
 from services.phish_simulator import PhishingSimulator
 from services.training_quiz import TrainingQuizEngine
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+from pythonjsonlogger import jsonlogger
+
 # ======================================================================
 # Logging
 # ======================================================================
@@ -26,15 +31,22 @@ from services.training_quiz import TrainingQuizEngine
 LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
-logging.basicConfig(
-    level=getattr(logging, config.LOG_LEVEL),
-    format="%(asctime)s | %(levelname)-7s | %(name)s | %(message)s",
-    handlers=[
-        logging.FileHandler(os.path.join(LOG_DIR, "phishguard.log"), encoding="utf-8"),
-        logging.StreamHandler(),
-    ],
-)
+# Application Logging (Structured JSON)
+logHandler = logging.FileHandler(os.path.join(LOG_DIR, "phishguard.log"), encoding="utf-8")
+formatter = jsonlogger.JsonFormatter('%(asctime)s %(name)s %(levelname)s %(message)s')
+logHandler.setFormatter(formatter)
+
+# Remove predefined handlers and add the JSON one
+logging.getLogger().handlers = []
+logging.getLogger().addHandler(logHandler)
+logging.getLogger().setLevel(getattr(logging, config.LOG_LEVEL))
+
 logger = logging.getLogger("phishguard.app")
+
+# Prometheus Metrics
+SCAN_COUNTER = Counter("phishguard_scans_total", "Total URLs scanned", ["risk_level"])
+API_REQUEST_COUNTER = Counter("phishguard_api_requests_total", "Total API Requests", ["endpoint"])
+SCAN_LATENCY = Histogram("phishguard_scan_latency_seconds", "Scan processing time")
 
 # ======================================================================
 # App & Services
@@ -42,6 +54,14 @@ logger = logging.getLogger("phishguard.app")
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.SECRET_KEY
+
+# Security: Rate Limiting
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"],
+    storage_uri="memory://"
+)
 
 # Initialize all services
 detector = PhishGuardDetector(enable_ml=True)
@@ -80,7 +100,10 @@ def index():
 # ======================================================================
 
 @app.route("/analyze", methods=["POST"])
+@SCAN_LATENCY.time()
+@limiter.limit("10 per minute")
 def analyze():
+    API_REQUEST_COUNTER.labels(endpoint="/analyze").inc()
     data = request.get_json(silent=True) or {}
     url = (data.get("url") or "").strip()
 
@@ -116,6 +139,8 @@ def analyze():
     if len(scan_history) > 100:
         scan_history.pop()
 
+    SCAN_COUNTER.labels(risk_level=result["risk_level"]).inc()
+
     return jsonify(result)
 
 
@@ -144,8 +169,16 @@ def soc_stats():
 # API: Phishing Simulator
 # ======================================================================
 
+@app.route("/metrics")
+def metrics():
+    """Prometheus metrics scraping endpoint."""
+    return Response(generate_latest(), mimetype=CONTENT_TYPE_LATEST)
+
+
 @app.route("/api/simulate", methods=["POST"])
+@limiter.limit("5 per minute")
 def simulate():
+    API_REQUEST_COUNTER.labels(endpoint="/api/simulate").inc()
     data = request.get_json(silent=True) or {}
     difficulty = data.get("difficulty", "medium")
     count = min(int(data.get("count", 3)), 10)

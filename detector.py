@@ -2,7 +2,7 @@
 PhishGuard - Core Detection Engine (v2)
 Integrates rule engine, ML classifier, threat intelligence,
 anomaly detection, adaptive scoring, behavior tracking,
-and explainable AI into a unified analysis pipeline.
+brand spoofing, and explainable AI into a unified analysis pipeline.
 """
 
 import logging
@@ -24,6 +24,7 @@ from services.threat_intel import ThreatIntelService
 from services.adaptive_scoring import AdaptiveScoringEngine
 from services.anomaly_detector import AnomalyDetector
 from services.explainability import ExplainabilityEngine
+from services.brand_spoof import BrandSpoofDetector # ADDED: Brand Spoofing
 
 logger = logging.getLogger("phishguard.detector")
 
@@ -162,6 +163,7 @@ class PhishGuardDetector:
         self.adaptive = AdaptiveScoringEngine()
         self.anomaly = AnomalyDetector()
         self.explainer = ExplainabilityEngine()
+        self.brand_spoof = BrandSpoofDetector() # ADDED: Brand spoof detector
 
         # Scan counter for adaptive weight updates
         self._scan_count = 0
@@ -175,7 +177,7 @@ class PhishGuardDetector:
         if enable_ml:
             self._try_load_model()
 
-        logger.info("PhishGuard Detector v2 initialized with all services.")
+        logger.info("PhishGuard Detector v2 initialized with all services (including Brand Spoofing).")
 
     def _try_load_model(self) -> None:
         clf = PhishingClassifier()
@@ -209,10 +211,11 @@ class PhishGuardDetector:
         4. Threat intelligence
         5. Anomaly detection
         6. Email analysis
-        7. Behavior tracking
-        8. Score blending
-        9. Explainability report
-        10. SOC logging
+        7. Brand Spoofing / Context analysis
+        8. Behavior tracking
+        9. Score blending
+        10. Explainability report
+        11. SOC logging
         """
         features: URLFeatures = extract_features(url)
         triggered_rules: List[str] = []
@@ -253,16 +256,26 @@ class PhishGuardDetector:
             email_flags = analyze_email_body(email_body)
             email_bonus = len(email_flags) * 5
 
-        # ── 6. Weighted Score Blending ──
+        # ── 6. Brand Spoofing (Context-Aware) ──
+        from urllib.parse import urlparse
+        spoof_report = self.brand_spoof.analyze(urlparse(url).netloc, url)
+        spoof_bonus = spoof_report.context_bonus
+
+        if spoof_report.is_spoofing:
+             triggered_rules.extend(spoof_report.details)
+             triggered_ids.append("brand_spoofing")
+
+        # ── 7. Weighted Score Blending ──
         blended = (
             rule_score * config.scoring.RULE_WEIGHT +
             ml_score * config.scoring.ML_WEIGHT +
             intel_score * config.scoring.INTEL_WEIGHT +
             anomaly_score * config.scoring.ANOMALY_WEIGHT +
-            email_bonus
+            email_bonus +
+            spoof_bonus
         )
 
-        # ── 7. Behavior Tracking ──
+        # ── 8. Behavior Tracking ──
         behavior_data = None
         if behavior_tracker and session_id:
             # Preliminary score for behavior check
@@ -273,20 +286,21 @@ class PhishGuardDetector:
             )
             blended += behavior_data.get("escalation_bonus", 0)
 
-        # ── 8. Final Score ──
+        # ── 9. Final Score ──
         final_score = max(0, min(100, int(round(blended))))
         level = _classify_risk(final_score)
         action = _recommend_action(level)
 
-        # ── 9. Record for adaptive learning ──
+        # ── 10. Record for adaptive learning ──
         is_high = level == RiskLevel.HIGH
         for rid in triggered_ids:
-            self.adaptive.record_fire(rid, is_high)
+            if rid != "brand_spoofing": # Don't adapt the brand spoofing rule weight directly in the old engine
+                 self.adaptive.record_fire(rid, is_high)
         self._scan_count += 1
         if self._scan_count % self._ADAPT_INTERVAL == 0:
             self.adaptive.update_weights()
 
-        # ── 10. Explainability ──
+        # ── 11. Explainability ──
         explanation = self.explainer.explain(
             url=url,
             risk_score=final_score,
@@ -300,11 +314,17 @@ class PhishGuardDetector:
             behavior=behavior_data,
         )
 
-        # ── 11. SOC Logging ──
+        # ── 12. SOC Logging ──
         if soc_logger:
             soc_logger.log_scan(url, final_score, level.value, action)
             if anomaly_result.get("anomalies"):
                 soc_logger.log_anomaly(url, anomaly_result["anomalies"])
+            if spoof_report.is_spoofing:
+                 soc_logger.log_event(
+                     "WARNING",
+                     f"Brand Spoofing: {spoof_report.matched_brand}",
+                     "|".join(spoof_report.details)
+                 )
 
         # ── Build Response ──
         result = {
@@ -322,6 +342,7 @@ class PhishGuardDetector:
                 "anomalies": anomaly_result.get("anomalies", []),
                 "is_active": anomaly_result.get("is_active", False),
             },
+            "brand_spoofing": spoof_report.to_dict(), # ADDED
             "behavior": behavior_data,
             "explanation": explanation,
             "scoring_breakdown": {
@@ -330,14 +351,15 @@ class PhishGuardDetector:
                 "threat_intel": round(intel_score * config.scoring.INTEL_WEIGHT, 1),
                 "anomaly": round(anomaly_score * config.scoring.ANOMALY_WEIGHT, 1),
                 "email_bonus": email_bonus,
+                "context_bonus": spoof_bonus, # ADDED
                 "behavior_bonus": behavior_data.get("escalation_bonus", 0) if behavior_data else 0,
             },
         }
 
         logger.info(
-            "Analysis | %s | score=%d level=%s action=%s [R:%.0f ML:%.0f TI:%.0f AN:%.0f]",
+            "Analysis | %s | score=%d level=%s action=%s [R:%.0f ML:%.0f TI:%.0f AN:%.0f SP:%.0f]",
             url, final_score, level.value, action,
-            rule_score, ml_score, intel_score, anomaly_score,
+            rule_score, ml_score, intel_score, anomaly_score, spoof_bonus
         )
         return result
 
@@ -363,10 +385,14 @@ if __name__ == "__main__":
             "url": "http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123",
             "email": "URGENT: confirm your identity within 24 hours or your credit card will be locked out.",
         },
+        {
+             "url": "https://paypa1.com/login",
+             "email": "Verify your identity"
+        }
     ]
 
     print("\n" + "=" * 64)
-    print("  PhishGuard v2 - Advanced Detection Engine Test")
+    print("  PhishGuard v2.1 - Advanced Detection Engine Test")
     print("=" * 64)
 
     for i, tc in enumerate(test_cases, 1):
@@ -380,8 +406,10 @@ if __name__ == "__main__":
               f"blacklisted={result['threat_intel']['is_blacklisted']}")
         bd = result['scoring_breakdown']
         print(f"  Blend:  Rule={bd['rule_engine']} ML={bd['ml_classifier']} "
-              f"TI={bd['threat_intel']} AN={bd['anomaly']}")
+              f"TI={bd['threat_intel']} AN={bd['anomaly']} SP={bd['context_bonus']}")
         print(f"  Confidence: {result['explanation']['confidence']['percentage']}% "
               f"({result['explanation']['confidence']['label']})")
+        if result['brand_spoofing']['is_spoofing']:
+            print(f"  Spoofed: {result['brand_spoofing']['matched_brand']} ({result['brand_spoofing']['spoof_type']})")
 
     print("\n" + "=" * 64)

@@ -46,6 +46,8 @@
     var explainSummary = $("explain-summary");
     var evidenceChain = $("evidence-chain");
     var intelGrid = $("intel-grid");
+    var spoofSection = $("spoof-section");
+    var spoofAlert = $("spoof-alert");
     var emailSection = $("email-section");
     var emailList = $("email-list");
     var behaviorSection = $("behavior-section");
@@ -64,8 +66,20 @@
     var eventFeed = $("event-feed");
 
     // Simulator
+    var simModeToggle = $("sim-mode-toggle");
+    var simGenView = $("sim-generator-view");
+    var simQuizView = $("sim-quiz-view");
     var simResults = $("sim-results");
     var simGenerateBtn = $("sim-generate-btn");
+    
+    // Quiz
+    var quizStartBtn = $("quiz-start-btn");
+    var quizContainer = $("quiz-container");
+    var quizScore = $("quiz-score");
+    var quizStreak = $("quiz-streak");
+    var quizAccuracy = $("quiz-accuracy");
+    var currentQuiz = [];
+    var quizIndex = 0;
 
     var ARC_LENGTH = 251.33;
 
@@ -239,6 +253,21 @@
         // Threat Intel
         renderIntel(data.threat_intel);
 
+        // Brand Spoofing
+        if (data.brand_spoofing && data.brand_spoofing.is_spoofing) {
+            spoofSection.classList.remove("hidden");
+            var spInfo = data.brand_spoofing;
+            var spHtml = '<strong>' + escapeHtml(spInfo.matched_brand) + ' Impersonation</strong> (' + Math.round(spInfo.similarity_score * 100) + '% match)<br>';
+            if (spInfo.details && spInfo.details.length > 0) {
+                spHtml += '<ul class="rule-list rule-list--email" style="margin-top:8px">';
+                spInfo.details.forEach(function(d){ spHtml += '<li>' + escapeHtml(d) + '</li>'; });
+                spHtml += '</ul>';
+            }
+            spoofAlert.innerHTML = spHtml;
+        } else {
+            spoofSection.classList.add("hidden");
+        }
+
         // Email
         if (data.email_flags && data.email_flags.length > 0) {
             emailSection.classList.remove("hidden");
@@ -405,9 +434,26 @@
     });
 
     // ═══════════════════════════════════════════════
-    // Phishing Simulator
+    // Phishing Simulator & Training Mode
     // ═══════════════════════════════════════════════
 
+    // Mode Toggle
+    simModeToggle.addEventListener("click", function (e) {
+        if(e.target.tagName !== "BUTTON") return;
+        var mode = e.target.dataset.mode;
+        document.querySelectorAll("#sim-mode-toggle .chip").forEach(function(c) { c.classList.remove("active"); });
+        e.target.classList.add("active");
+        
+        if (mode === "generator") {
+            simGenView.classList.remove("hidden");
+            simQuizView.classList.add("hidden");
+        } else {
+            simGenView.classList.add("hidden");
+            simQuizView.classList.remove("hidden");
+        }
+    });
+
+    // Generator logic
     var simDifficulty = "medium";
 
     document.querySelectorAll("#sim-difficulty .chip").forEach(function (chip) {
@@ -419,6 +465,7 @@
     });
 
     simGenerateBtn.addEventListener("click", function () {
+        simGenerateBtn.disabled = true;
         fetch("/api/simulate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -426,6 +473,7 @@
         })
         .then(function (r) { return r.json(); })
         .then(function (samples) {
+            simGenerateBtn.disabled = false;
             simResults.innerHTML = samples.map(function (s, i) {
                 return '<div class="sim-card">' +
                     '<div class="sim-card__header">' +
@@ -433,20 +481,18 @@
                         '<span class="sim-card__attack">Expected: ' + s.expected_risk + '</span>' +
                     '</div>' +
                     '<div class="sim-card__url">' + escapeHtml(s.url) + '</div>' +
-                    '<div class="sim-card__subject">' + escapeHtml(s.email_subject) + '</div>' +
-                    '<div class="sim-card__body">' + escapeHtml(s.email_body) + '</div>' +
+                    '<div class="sim-card__subject">' + escapeHtml(s.email_subject || "") + '</div>' +
+                    '<div class="sim-card__body">' + escapeHtml(s.email_body || "") + '</div>' +
                     '<div class="sim-card__actions">' +
-                        '<button class="sim-card__btn sim-test-btn" data-url="' + escapeHtml(s.url) + '" data-email="' + escapeHtml(s.email_body) + '">Test with PhishGuard</button>' +
+                        '<button class="sim-card__btn sim-test-btn" data-url="' + escapeHtml(s.url) + '" data-email="' + escapeHtml(s.email_body || "") + '">Test with PhishGuard</button>' +
                     '</div>' +
                     '</div>';
             }).join("");
 
-            // Wire test buttons
             simResults.querySelectorAll(".sim-test-btn").forEach(function (btn) {
                 btn.addEventListener("click", function () {
                     urlInput.value = btn.dataset.url;
                     emailInput.value = btn.dataset.email;
-                    // Switch to analyze tab
                     tabBtns.forEach(function (b) { b.classList.toggle("active", b.dataset.tab === "analyze"); });
                     panels.forEach(function (p) { p.classList.toggle("active", p.id === "panel-analyze"); });
                     form.dispatchEvent(new Event("submit"));
@@ -454,6 +500,108 @@
             });
         });
     });
+
+    // Quiz logic
+    quizStartBtn.addEventListener("click", function() {
+        quizStartBtn.disabled = true;
+        quizStartBtn.innerHTML = '<div class="spinner"></div> Loading...';
+        
+        fetch("/api/quiz/generate?difficulty=" + simDifficulty + "&count=5")
+        .then(function(r) { return r.json(); })
+        .then(function(challenges) {
+            quizStartBtn.style.display = "none";
+            currentQuiz = challenges;
+            quizIndex = 0;
+            renderQuizCard();
+        });
+    });
+
+    function renderQuizCard() {
+        if (quizIndex >= currentQuiz.length) {
+            quizContainer.innerHTML = '<div class="sim-card" style="text-align:center"><h3 style="margin-bottom:10px">Session Complete!</h3><button class="btn btn--primary" onclick="$(\'quiz-start-btn\').click()">Play Again</button></div>';
+            quizStartBtn.style.display = "flex";
+            quizStartBtn.disabled = false;
+            quizStartBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn__icon"><polygon points="5 3 19 12 5 21 5 3"/></svg> Start Another Session';
+            return;
+        }
+
+        var ch = currentQuiz[quizIndex];
+        var html = '<div class="quiz-card" id="quiz-card-' + ch.challenge_id + '">' +
+            '<div style="font-size:0.75rem; color:var(--text-muted); font-weight:700; text-transform:uppercase; margin-bottom:10px;">Challenge ' + (quizIndex + 1) + ' of ' + currentQuiz.length + '</div>' +
+            '<div class="quiz-card__url">' + escapeHtml(ch.url) + '</div>';
+            
+        if (ch.email_body) {
+            html += '<div class="sim-card__subject">' + escapeHtml(ch.email_subject || "(No subject)") + '</div>';
+            html += '<div class="sim-card__body" style="margin-bottom:15px">' + escapeHtml(ch.email_body) + '</div>';
+        }
+        
+        html += '<div class="quiz-card__hint">💡 Hint: ' + escapeHtml(ch.hint) + '</div>' +
+            '<div class="quiz-card__actions" id="quiz-actions">' +
+                '<button class="quiz-btn quiz-btn--safe" data-ans="safe">Safe</button>' +
+                '<button class="quiz-btn quiz-btn--phish" data-ans="phishing">Phishing</button>' +
+            '</div>' +
+            '<div class="quiz-feedback" id="quiz-feedback"></div>' +
+        '</div>';
+        
+        quizContainer.innerHTML = html;
+
+        // Bind answers
+        var actions = $("quiz-actions");
+        actions.querySelectorAll(".quiz-btn").forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                var ans = btn.dataset.ans;
+                actions.querySelectorAll(".quiz-btn").forEach(function(b){ b.disabled = true; });
+                submitQuizAnswer(ch.challenge_id, ans);
+            });
+        });
+    }
+
+    function submitQuizAnswer(cid, ans) {
+        fetch("/api/quiz/evaluate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ challenge_id: cid, answer: ans })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+            var fb = $("quiz-feedback");
+            var act = $("quiz-actions");
+            var cClass = res.is_correct ? "correct" : "incorrect";
+            var header = res.is_correct ? "🎯 Correct!" : "❌ Incorrect";
+            
+            // Highlight selected button
+            act.querySelectorAll(".quiz-btn").forEach(function(b){
+                if(b.dataset.ans !== ans) b.style.opacity = 0.3;
+            });
+
+            var fbHtml = '<div class="quiz-feedback__title">' + header + '</div>' +
+                '<div class="quiz-feedback__expl">' + escapeHtml(res.explanation) + '</div>';
+                
+            if (res.indicators && res.indicators.length > 0) {
+                fbHtml += '<ul class="rule-list" style="margin-top:10px">';
+                res.indicators.forEach(function(ind) { fbHtml += '<li>' + escapeHtml(ind) + '</li>'; });
+                fbHtml += '</ul>';
+            }
+            
+            fbHtml += '<button class="btn btn--primary" style="margin-top:15px" id="quiz-next">Next Challenge &rarr;</button>';
+            
+            fb.innerHTML = fbHtml;
+            fb.className = "quiz-feedback show " + cClass;
+
+            // Update stats
+            if (res.session_score) {
+                var ss = res.session_score;
+                quizScore.textContent = ss.correct + '/' + ss.total;
+                quizStreak.textContent = ss.streak;
+                quizAccuracy.textContent = ss.accuracy + '%';
+            }
+
+            $("quiz-next").addEventListener("click", function() {
+                quizIndex++;
+                renderQuizCard();
+            });
+        });
+    }
 
     // ═══════════════════════════════════════════════
     // Auto-refresh threat indicator

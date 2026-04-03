@@ -17,6 +17,7 @@ from virustotal import check_virustotal
 from services.behavior_tracker import BehaviorTracker
 from services.soc_logger import SOCLogger
 from services.phish_simulator import PhishingSimulator
+from services.training_quiz import TrainingQuizEngine
 
 # ======================================================================
 # Logging
@@ -47,6 +48,7 @@ detector = PhishGuardDetector(enable_ml=True)
 behavior_tracker = BehaviorTracker()
 soc = SOCLogger()
 simulator = PhishingSimulator()
+quiz_engine = TrainingQuizEngine()
 
 # Scan history (in-memory)
 scan_history: list[dict] = []
@@ -150,6 +152,38 @@ def simulate():
 
     samples = simulator.generate(difficulty=difficulty, count=count)
     return jsonify([s.to_dict() for s in samples])
+
+
+# ======================================================================
+# API: Training Quiz Mode
+# ======================================================================
+
+@app.route("/api/quiz/generate", methods=["GET"])
+def quiz_generate():
+    difficulty = request.args.get("difficulty", "mixed")
+    count = int(request.args.get("count", 5))
+    challenges = quiz_engine.generate_quiz(difficulty, count)
+    return jsonify([c.to_dict() for c in challenges])
+
+
+@app.route("/api/quiz/evaluate", methods=["POST"])
+def quiz_evaluate():
+    data = request.get_json(silent=True) or {}
+    cid = data.get("challenge_id")
+    answer = data.get("answer")
+    sid = get_session_id()
+
+    if cid is None or not answer:
+        return jsonify({"error": "Missing parameters"}), 400
+
+    result = quiz_engine.evaluate(int(cid), answer)
+    if not result:
+        return jsonify({"error": "Invalid challenge ID"}), 404
+
+    score_data = quiz_engine.update_session_score(sid, result.is_correct)
+    resp = result.to_dict()
+    resp["session_score"] = score_data
+    return jsonify(resp)
 
 
 # ======================================================================

@@ -140,6 +140,10 @@ class SOCLogger:
             url=url,
         )
 
+    def log_event(self, severity_str: str, title: str, detail: str, url: Optional[str] = None) -> SOCEvent:
+        severity = AlertSeverity(severity_str.upper())
+        return self._emit("alert", severity, title, detail, url=url)
+
     def get_events(self, limit: int = 30, severity: Optional[str] = None) -> List[Dict]:
         events = self._events
         if severity:

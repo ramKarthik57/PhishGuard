@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import List, Tuple, Optional
 
 import numpy as np
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import accuracy_score, classification_report, roc_auc_score, precision_score, recall_score, f1_score
@@ -114,10 +115,34 @@ class PhishingClassifier:
     # ── train ────────────────────────────────
     def train(self, n_legit: int = 800, n_phish: int = 800) -> dict:
         """
-        Train on synthetic data.  Returns a metrics dict.
+        Train on data. First checks for datasets/real_phishing.csv.
+        If unavailable, falls back to generating high-quality synthetic data.
+        Returns a metrics dict.
         """
-        logger.info("Generating synthetic training data (%d + %d samples)…", n_legit, n_phish)
-        X_raw, y_raw = generate_synthetic_dataset(n_legit, n_phish)
+        dataset_path = Path(__file__).parent / "datasets" / "real_phishing.csv"
+        X_raw, y_raw = [], []
+
+        if dataset_path.exists():
+            try:
+                df = pd.read_csv(dataset_path)
+                if 'url' in df.columns and 'label' in df.columns:
+                    logger.info("Real-world dataset found! Loading CSV data...")
+                    for _, row in df.iterrows():
+                        u = str(row['url'])
+                        l = int(row['label'])
+                        feats = extract_features(u)
+                        X_raw.append(features_to_vector(feats))
+                        y_raw.append(l)
+                else:
+                    logger.warning("Dataset CSV missing 'url' or 'label' columns. Falling back to synthetic.")
+            except Exception as e:
+                logger.error(f"Failed to load CSV dataset: {e}. Falling back to synthetic.")
+
+        if not X_raw:
+            logger.info("Generating synthetic training data (%d + %d samples)…", n_legit, n_phish)
+            X_raw, y_raw = generate_synthetic_dataset(n_legit, n_phish)
+        else:
+            logger.info("Loaded %d samples from real-world dataset.", len(X_raw))
 
         X = np.array(X_raw, dtype=np.float64)
         y = np.array(y_raw, dtype=np.int32)

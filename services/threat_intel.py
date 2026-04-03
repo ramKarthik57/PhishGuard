@@ -87,7 +87,7 @@ class ThreatIntelService:
         """Run full threat intelligence analysis on a URL."""
         parsed = urlparse(url if "://" in url else f"http://{url}")
         extracted = tldextract.extract(url)
-        domain = extracted.registered_domain or parsed.netloc
+        domain = extracted.top_domain_under_public_suffix or parsed.netloc
         tld = extracted.suffix
 
         # Cache check

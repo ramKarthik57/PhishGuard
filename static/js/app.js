@@ -350,7 +350,10 @@
         setLoading(true);
         fetch("/analyze", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "X-API-Key": "TEST-KEY"
+            },
             body: JSON.stringify({ url: url, email_body: emailInput.value.trim() || null }),
         })
         .then(function (r) {
@@ -380,7 +383,9 @@
 
     function refreshSOC() {
         // Threat level
-        fetch("/api/soc/threat-level")
+        fetch("/api/soc/threat-level", {
+            headers: { "X-API-Key": "TEST-KEY" }
+        })
             .then(function (r) { return r.json(); })
             .then(function (tl) {
                 socThreatLabel.textContent = tl.label;
@@ -404,7 +409,9 @@
     function refreshEvents(severity) {
         var url = "/api/soc/events?limit=30";
         if (severity && severity !== "all") url += "&severity=" + severity;
-        fetch(url)
+        fetch(url, {
+            headers: { "X-API-Key": "TEST-KEY" }
+        })
             .then(function (r) { return r.json(); })
             .then(function (events) {
                 if (events.length === 0) {
@@ -468,7 +475,10 @@
         simGenerateBtn.disabled = true;
         fetch("/api/simulate", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "X-API-Key": "TEST-KEY"
+            },
             body: JSON.stringify({ difficulty: simDifficulty, count: 3 }),
         })
         .then(function (r) { return r.json(); })
@@ -506,7 +516,9 @@
         quizStartBtn.disabled = true;
         quizStartBtn.innerHTML = '<div class="spinner"></div> Loading...';
         
-        fetch("/api/quiz/generate?difficulty=" + simDifficulty + "&count=5")
+        fetch("/api/quiz/generate?difficulty=" + simDifficulty + "&count=5", {
+            headers: { "X-API-Key": "TEST-KEY" }
+        })
         .then(function(r) { return r.json(); })
         .then(function(challenges) {
             quizStartBtn.style.display = "none";
@@ -559,7 +571,10 @@
     function submitQuizAnswer(cid, ans) {
         fetch("/api/quiz/evaluate", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "X-API-Key": "TEST-KEY"
+            },
             body: JSON.stringify({ challenge_id: cid, answer: ans })
         })
         .then(function(r) { return r.json(); })
@@ -608,7 +623,9 @@
     // ═══════════════════════════════════════════════
 
     setInterval(function () {
-        fetch("/api/soc/threat-level")
+        fetch("/api/soc/threat-level", {
+            headers: { "X-API-Key": "TEST-KEY" }
+        })
             .then(function (r) { return r.json(); })
             .then(function (tl) {
                 ["level-0","level-1","level-2","level-3","level-4"].forEach(function(c){

@@ -8,7 +8,8 @@ import uuid
 import logging
 from datetime import datetime
 
-from flask import Flask, render_template, request, jsonify, session, Response
+from flask import Flask, render_template, request, jsonify, session, Response, abort
+from functools import wraps
 
 from config import config
 from detector import PhishGuardDetector
@@ -23,6 +24,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 from pythonjsonlogger import jsonlogger
+from flasgger import Swagger, swag_from
 
 # ======================================================================
 # Logging
@@ -54,6 +56,12 @@ SCAN_LATENCY = Histogram("phishguard_scan_latency_seconds", "Scan processing tim
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.SECRET_KEY
+app.config['SWAGGER'] = {
+    'title': 'PhishGuard API',
+    'uiversion': 3,
+    'openapi': '3.0.0'
+}
+swagger = Swagger(app)
 
 # Security: Rate Limiting
 limiter = Limiter(
@@ -62,6 +70,22 @@ limiter = Limiter(
     default_limits=["200 per day", "50 per hour"],
     storage_uri="memory://"
 )
+
+# API Authentication configuration
+config.API_KEY = os.environ.get("PHISHGUARD_API_KEY", "TEST-KEY")
+
+def require_api_key(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Allow requests originating directly from the local UI without strict API Key checks
+        # in a real environment this would be more secure.
+        if request.headers.get("X-API-Key") and request.headers.get("X-API-Key") == config.API_KEY:
+            return f(*args, **kwargs)
+        # Fallback to check if it's the web UI local
+        if request.remote_addr == '127.0.0.1' and request.headers.get("X-API-Key") == "TEST-KEY":
+             return f(*args, **kwargs)
+        abort(401, description="Invalid or missing X-API-Key header.")
+    return decorated_function
 
 # Initialize all services
 detector = PhishGuardDetector(enable_ml=True)
@@ -102,7 +126,46 @@ def index():
 @app.route("/analyze", methods=["POST"])
 @SCAN_LATENCY.time()
 @limiter.limit("10 per minute")
+@require_api_key
 def analyze():
+    """
+    Analyze a URL and optional email body for phishing indicators.
+    ---
+    tags:
+      - Core Analysis
+    security:
+      - ApiKeyAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              url:
+                type: string
+                description: The target URL to analyze
+              email_body:
+                type: string
+                description: Optional email context
+              extension_metadata:
+                type: object
+                description: Context parsed directly from browser DOM
+    responses:
+      200:
+        description: Successful scan results
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                risk_score:
+                  type: integer
+                risk_level:
+                  type: string
+                action:
+                  type: string
+    """
     API_REQUEST_COUNTER.labels(endpoint="/analyze").inc()
     data = request.get_json(silent=True) or {}
     url = (data.get("url") or "").strip()
@@ -151,6 +214,7 @@ def analyze():
 # ======================================================================
 
 @app.route("/api/soc/events")
+@require_api_key
 def soc_events():
     severity = request.args.get("severity")
     limit = int(request.args.get("limit", 30))
@@ -158,11 +222,13 @@ def soc_events():
 
 
 @app.route("/api/soc/threat-level")
+@require_api_key
 def soc_threat_level():
     return jsonify(soc.get_threat_level())
 
 
 @app.route("/api/soc/stats")
+@require_api_key
 def soc_stats():
     return jsonify(soc.get_stats())
 
@@ -179,7 +245,31 @@ def metrics():
 
 @app.route("/api/simulate", methods=["POST"])
 @limiter.limit("5 per minute")
+@require_api_key
 def simulate():
+    """
+    Generate synthetic phishing examples for testing or training.
+    ---
+    tags:
+      - Simulation
+    security:
+      - ApiKeyAuth: []
+    requestBody:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              difficulty:
+                type: string
+                enum: [easy, medium, hard]
+              count:
+                type: integer
+    responses:
+      200:
+        description: Array of generated samples
+    """
     API_REQUEST_COUNTER.labels(endpoint="/api/simulate").inc()
     data = request.get_json(silent=True) or {}
     difficulty = data.get("difficulty", "medium")
@@ -194,6 +284,7 @@ def simulate():
 # ======================================================================
 
 @app.route("/api/quiz/generate", methods=["GET"])
+@require_api_key
 def quiz_generate():
     difficulty = request.args.get("difficulty", "mixed")
     count = int(request.args.get("count", 5))
@@ -202,6 +293,7 @@ def quiz_generate():
 
 
 @app.route("/api/quiz/evaluate", methods=["POST"])
+@require_api_key
 def quiz_evaluate():
     data = request.get_json(silent=True) or {}
     cid = data.get("challenge_id")
@@ -231,6 +323,7 @@ def history():
 
 
 @app.route("/api/session")
+@require_api_key
 def session_info():
     sid = get_session_id()
     summary = behavior_tracker.get_session_summary(sid)
@@ -242,6 +335,7 @@ def session_info():
 # ======================================================================
 
 @app.route("/api/adaptive/snapshot")
+@require_api_key
 def adaptive_snapshot():
     return jsonify(detector.adaptive.get_snapshot())
 
@@ -251,6 +345,7 @@ def adaptive_snapshot():
 # ======================================================================
 
 @app.route("/api/anomaly/baseline")
+@require_api_key
 def anomaly_baseline():
     return jsonify(detector.anomaly.get_baseline_summary())
 

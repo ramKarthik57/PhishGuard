@@ -8,3 +8,5 @@ flask-limiter>=3.5.0
 python-json-logger>=2.0.7
 prometheus-client>=0.20.0
 pytest>=8.0.0
+flasgger>=0.9.7.1
+pandas>=2.0.0

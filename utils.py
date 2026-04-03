@@ -77,6 +77,7 @@ class URLFeatures:
     entropy: float = 0.0
     hex_encoded_chars: int = 0
     special_char_ratio: float = 0.0
+    is_punycode: bool = False
 
 
 @dataclass
@@ -136,7 +137,7 @@ def extract_features(raw_url: str) -> URLFeatures:
     parsed = urlparse(url)
     extracted = tldextract.extract(url)
 
-    domain = extracted.registered_domain or parsed.netloc
+    domain = extracted.top_domain_under_public_suffix or parsed.netloc
     subdomain = extracted.subdomain
     path = parsed.path or ""
 
@@ -164,6 +165,7 @@ def extract_features(raw_url: str) -> URLFeatures:
     )
     feats.entropy = compute_entropy(parsed.netloc)
     feats.hex_encoded_chars = len(HEX_ENCODED_PATTERN.findall(raw_url))
+    feats.is_punycode = parsed.netloc.startswith("xn--") or ".xn--" in parsed.netloc
 
     alpha = sum(c.isalpha() for c in url)
     feats.special_char_ratio = (
@@ -194,6 +196,7 @@ def features_to_vector(feats: URLFeatures) -> List[float]:
         feats.entropy,
         feats.hex_encoded_chars,
         feats.special_char_ratio,
+        float(feats.is_punycode),
     ]
 
 

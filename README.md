@@ -1,141 +1,118 @@
 <div align="center">
 
-# PhishGuard
+# PhishGuard 🛡️
 
-### AI-Powered Phishing Detection & Response Tool
+### Enterprise-Grade AI-Powered Phishing Detection & Response
 
-[![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.x-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://docker.com)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-Helm-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Swagger](https://img.shields.io/badge/API-Swagger-85EA2D?logo=swagger&logoColor=white)](http://localhost:5000/apidocs)
 
-**PhishGuard** combines a 17-rule heuristic engine, a Random Forest ML classifier, and dynamic Context-Aware Brand Spoofing models to detect phishing URLs and social-engineering emails in real-time.
+**PhishGuard** is a multi-layered security platform that identifies phishing threats using heuristic rule engines, **Random Forest** machine learning, and context-aware brand spoofing detection.
 
 </div>
 
 ---
 
-## Features
+## 📸 Platform Overview
 
-| Capability | Description |
-|---|---|
-| **URL Heuristics** | Length, entropy, IP detection, subdomain depth, suspicious TLDs |
-| **Brand Spoofing** | Detects Homoglyphs, Typosquatting (Levenshtein), and Combo-squatting |
-| **Email NLP Scanning** | Detects urgency phrases, generic greetings, embedded URL clusters |
-| **ML Classification** | High-accuracy `RandomForestClassifier` trained on dynamic synthetic data |
-| **Explainable AI (XAI)** | Full evidence chain output explaining exactly *why* a threat score was generated |
-| **Interactive Training Quiz** | Built-in phishing simulator to train users on identifying attacks |
-| **Enterprise Readiness** | Prometheus Metrics, JSON Logging, Rate Limiting, Docker & Helm packaging |
-| **VirusTotal Integration** | Optional API enrichment for real-world reputation data with resilient exponential backoff retries |
+### Analysis Dashboard
+![Analysis Dashboard](docs/screenshots/dashboard.png)
+*Real-time threat assessment with Explainable AI (XAI) breakdown and triggered rule alerts.*
 
----
+### Security Operations Center (SOC)
+![SOC Monitor](docs/screenshots/soc_monitor.png)
+*Centralized telemetry, threat level tracking, and persistent event logging.*
 
-## Screenshots
-
-<details>
-<summary><b>View the Interactive SOC Dashboard UI</b></summary>
-<br>
-
-*(Note: These are representative workflow screenshots)*
-
-- **Dashboard Analysis:** Displays the XAI Evidence Chain and Context-Aware Brand Spoofing alerts.
-- **Simulator Quiz:** Fully gamified training platform.
-- **SOC Monitor:** Live feed of incoming API threats.
-
-</details>
+### Phishing Awareness Simulator
+![Interactive Quiz](docs/screenshots/quiz_mode.png)
+*Gamified training module to educate users on identifying sophisticated phishing attempts.*
 
 ---
 
-## ML Metrics & Benchmarks
+## 🏗️ Architecture
 
-The built-in ML classifier has been upgraded to a **Random Forest** architecture. Upon first launch, it generates a synthetic dataset and trains itself, outputting standard Data Science metrics.
-
-### Model Performance
-
-| Metric | Target |
-|--------|-------|
-| **Accuracy** | ~98.5% |
-| **F1 Score** | ~98.0% |
-| **ROC/AUC** | ~99.0% |
-| **5-Fold CV Mean** | ~97.5% (Variance: +/- 1.2%) |
-
-### API Performance Benchmarks
-
-Deployed behind **Gunicorn** on a standard 2vCPU / 2GB RAM container:
-
-- **P50 Latency:** ~15ms (without VirusTotal lookup)
-- **P99 Latency:** ~45ms
-- **Throughput:** >500 req/sec
+```mermaid
+graph TD
+    A[User Request / Browser Extension] --> B[Flask API Gateway]
+    B --> C[PhishGuard Detector]
+    C --> D[Heuristic Rule Engine]
+    C --> E[RF ML Classifier]
+    C --> F[Brand Spoofing Engine]
+    C --> G[Threat Intel Service]
+    G --> H[(VirusTotal API)]
+    C --> I[Explainability Layer]
+    I --> J[JSON / SOC Logs]
+    I --> K[Prometheus Metrics]
+    I --> L[Interactive Dashboard]
+```
 
 ---
 
-## Quick Start (Docker)
+## 🚀 Quick Start
 
-The fastest and safest way to run PhishGuard is via Docker Compose:
-
+### 🐳 Docker (Recommended)
 ```bash
 git clone https://github.com/yourusername/PhishGuard.git
 cd PhishGuard
 
-# Build and start the container in detached mode
+# Launch with Docker Compose
 docker-compose up --build -d
 ```
-Open **http://localhost:5000** in your browser.
+Access at **http://localhost:5000**
+
+### 🐍 Local Installation (Manual)
+1. **Setup Environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+2. **Configuration:**
+   Set your API keys:
+   ```bash
+   export PHISHGUARD_API_KEY="YOUR-SECURE-KEY"
+   export VIRUSTOTAL_API_KEY="YOUR-VT-KEY"
+   ```
+3. **Run Platform:**
+   ```bash
+   python app.py
+   ```
 
 ---
 
-## Deployment (Kubernetes / Helm)
+## 🔐 Developer & Enterprise APIs
 
-For scalable production deployments, we provide a complete Helm Chart:
+PhishGuard provides a fully documented REST API secured by `X-API-Key` authentication.
 
+- **Interactive API Docs:** [http://localhost:5000/apidocs](http://localhost:5000/apidocs)
+- **Monitoring:** [http://localhost:5000/metrics](http://localhost:5000/metrics) (Prometheus format)
+
+### Example Analysis Request
 ```bash
-cd charts/phishguard
-
-# Install via Helm
-helm install my-phishguard . --namespace security --create-namespace
+curl -X POST http://localhost:5000/analyze \
+     -H "Content-Type: application/json" \
+     -H "X-API-Key: YOUR-SECURE-KEY" \
+     -d '{"url": "http://secure-login.paypa1.xyz/"}'
 ```
-
-**Key Values (`values.yaml`):**
-- Override `replicaCount` for horizontal scaling.
-- Set `env.VIRUSTOTAL_API_KEY` for enrichment.
-- Toggle `persistence.enabled` to retain the ML models across pod restarts.
 
 ---
 
-## Python API Usage
+## 📊 Performance & Robustness
+The platform includes an automated **Adversarial Testing Suite** to ensure detection of:
+- **Unicode/Homoglyph Attacks** (Cyrillic character substitution)
+- **Punycode/IDN Obfuscation** 
+- **URL Padding & Hex-Encoding**
 
-```python
-from detector import PhishGuardDetector
-
-detector = PhishGuardDetector(enable_ml=True)
-
-# Analyze a URL
-result = detector.analyze("http://secure-login.paypa1.xyz/verify")
-print(result.to_dict())
-
-# Extract XAI Reasoning
-for evidence in result.explanation.evidence_chain:
-    print(f"[{evidence.severity.upper()}] {evidence.indicator} - {evidence.detail}")
-```
-
-### Metrics & Observability
-
-Prometheus metrics are natively exposed:
+Run validation tests:
 ```bash
-curl http://localhost:5000/metrics
+python -m pytest tests/test_adversarial.py
 ```
-*Outputs `phishguard_scans_total`, `phishguard_api_requests_total`, and `phishguard_scan_latency_seconds`.*
 
 ---
 
-## Community & Contributing
-
-We welcome community contributions! Whether it's adding new heuristic rules, expanding the brand spoofing dictionary, or improving the frontend, your help is appreciated.
-
-Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for how to get started, and use the included GitHub Issue Templates for bug reports or feature requests.
-
-## License
-
-MIT License. See [LICENSE](LICENSE) for details.
+## ⚖️ License
+MIT License. Developed for enterprise security research and phishing awareness.

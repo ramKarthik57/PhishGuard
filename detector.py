@@ -36,12 +36,12 @@ logger = logging.getLogger("phishguard.detector")
 RULES: Dict[str, Dict[str, Any]] = {
     "long_url": {
         "check": lambda f: f.url_length > 75,
-        "base_weight": 10,
+        "base_weight": 15,
         "label": "URL length > 75 characters",
     },
     "very_long_url": {
         "check": lambda f: f.url_length > 120,
-        "base_weight": 8,
+        "base_weight": 20,
         "label": "URL length > 120 characters (highly suspicious)",
     },
     "ip_address": {
@@ -61,7 +61,7 @@ RULES: Dict[str, Dict[str, Any]] = {
     },
     "excessive_dashes": {
         "check": lambda f: f.dash_count >= 3,
-        "base_weight": 12,
+        "base_weight": 15,
         "label": "Excessive dashes in URL (>=3)",
     },
     "excessive_subdomains": {
@@ -77,8 +77,13 @@ RULES: Dict[str, Dict[str, Any]] = {
     },
     "suspicious_tld": {
         "check": lambda f: f.suspicious_tld,
-        "base_weight": 15,
+        "base_weight": 20,
         "label": "Suspicious TLD (.xyz, .top, .click...)",
+    },
+    "punycode_domain": {
+        "check": lambda f: f.is_punycode,
+        "base_weight": 25,
+        "label": "Punycode domain detected (potential homoglyph attack)",
     },
     "no_https": {
         "check": lambda f: not f.has_https,
@@ -260,7 +265,7 @@ class PhishGuardDetector:
         # ── 6. Brand Spoofing (Context-Aware) ──
         from urllib.parse import urlparse
         spoof_report = self.brand_spoof.analyze(urlparse(url).netloc, url)
-        spoof_bonus = spoof_report.context_bonus
+        spoof_bonus = spoof_report.context_bonus * 1.5 # Boost impact
 
         if spoof_report.is_spoofing:
              triggered_rules.extend(spoof_report.details)

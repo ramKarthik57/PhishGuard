@@ -1,0 +1,38 @@
+# Default values for phishguard.
+
+replicaCount: 3
+
+image:
+  repository: phishguard-api
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 5000
+
+ingress:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+persistence:
+  enabled: true
+  size: 1Gi
+  accessMode: ReadWriteOnce
+
+env:
+  FLASK_ENV: "production"
+  VIRUSTOTAL_API_KEY: ""
+
+metrics:
+  enabled: true
+  path: /metrics
+  port: 5000

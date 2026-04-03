@@ -797,3 +797,81 @@
 2026-04-03 17:25:45,211 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services (including Brand Spoofing).
 2026-04-03 17:25:45,211 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
 2026-04-03 17:25:45,211 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+{"asctime": "2026-04-03 17:33:22,560", "name": "phishguard.model", "levelname": "INFO", "message": "Model loaded \u2190 C:\\Users\\Ram\\Desktop\\PhishGuard\\artifacts\\phishguard_model.pkl"}
+{"asctime": "2026-04-03 17:33:22,560", "name": "phishguard.detector", "levelname": "INFO", "message": "ML model loaded successfully."}
+{"asctime": "2026-04-03 17:33:22,560", "name": "phishguard.detector", "levelname": "INFO", "message": "PhishGuard Detector v2 initialized with all services (including Brand Spoofing)."}
+{"asctime": "2026-04-03 17:33:22,561", "name": "phishguard.soc", "levelname": "INFO", "message": "SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational."}
+{"asctime": "2026-04-03 17:33:22,561", "name": "phishguard.app", "levelname": "INFO", "message": "PhishGuard v2 initialized with all services."}
+{"asctime": "2026-04-03 17:33:22,573", "name": "werkzeug", "levelname": "INFO", "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on http://127.0.0.1:5000"}
+{"asctime": "2026-04-03 17:33:22,573", "name": "werkzeug", "levelname": "INFO", "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"}
+{"asctime": "2026-04-03 17:33:22,578", "name": "werkzeug", "levelname": "INFO", "message": " * Restarting with watchdog (windowsapi)"}
+{"asctime": "2026-04-03 17:33:24,045", "name": "phishguard.model", "levelname": "INFO", "message": "Model loaded \u2190 C:\\Users\\Ram\\Desktop\\PhishGuard\\artifacts\\phishguard_model.pkl"}
+{"asctime": "2026-04-03 17:33:24,045", "name": "phishguard.detector", "levelname": "INFO", "message": "ML model loaded successfully."}
+{"asctime": "2026-04-03 17:33:24,045", "name": "phishguard.detector", "levelname": "INFO", "message": "PhishGuard Detector v2 initialized with all services (including Brand Spoofing)."}
+{"asctime": "2026-04-03 17:33:24,045", "name": "phishguard.soc", "levelname": "INFO", "message": "SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational."}
+{"asctime": "2026-04-03 17:33:24,045", "name": "phishguard.app", "levelname": "INFO", "message": "PhishGuard v2 initialized with all services."}
+{"asctime": "2026-04-03 17:33:24,053", "name": "werkzeug", "levelname": "WARNING", "message": " * Debugger is active!"}
+{"asctime": "2026-04-03 17:33:24,055", "name": "werkzeug", "levelname": "INFO", "message": " * Debugger PIN: 114-614-812"}
+{"asctime": "2026-04-03 17:33:29,079", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:29] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:36,410", "name": "phishguard.app", "levelname": "INFO", "message": "Analyzing URL: http://secure-login-verify.update-bank.xyz/ (session: 58c69357)"}
+{"asctime": "2026-04-03 17:33:36,435", "name": "phishguard.threat_intel", "levelname": "INFO", "message": "ThreatIntel | update-bank.xyz | blacklisted=False reputation=0.45 age=178d score=2"}
+{"asctime": "2026-04-03 17:33:36,435", "name": "phishguard.soc", "levelname": "WARNING", "message": "SOC [WARNING] Suspicious URL Detected (Score: 74) | URL shows phishing indicators. Level: HIGH. Action: block."}
+{"asctime": "2026-04-03 17:33:36,435", "name": "phishguard.detector", "levelname": "INFO", "message": "Analysis | http://secure-login-verify.update-bank.xyz/ | score=74 level=HIGH action=block [R:75 ML:96 TI:2 AN:0 SP:12]"}
+{"asctime": "2026-04-03 17:33:36,436", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:36] \"POST /analyze HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:39,076", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:39] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:40,910", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:40] \"GET / HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:40,972", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:40] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2026-04-03 17:33:40,980", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:40] \"\u001b[36mGET /static/js/app.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2026-04-03 17:33:49,085", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:49] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:51,030", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:51] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:53,292", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:53] \"GET / HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:53,308", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:53] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2026-04-03 17:33:53,311", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:53] \"\u001b[36mGET /static/js/app.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2026-04-03 17:33:56,594", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:56] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:56,595", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:56] \"GET /api/soc/events?limit=30 HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:33:59,087", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:33:59] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:03,318", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:03] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:09,079", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:09] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:13,327", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:13] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:19,080", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:19] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:23,324", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:23] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:29,077", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:29] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:33,327", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:33] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:39,076", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:39] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:43,325", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:43] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:49,074", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:49] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:49,807", "name": "phishguard.app", "levelname": "INFO", "message": "Analyzing URL: http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123 (session: 08385352)"}
+{"asctime": "2026-04-03 17:34:49,816", "name": "phishguard.threat_intel", "levelname": "INFO", "message": "ThreatIntel | 192.168.1.1 | blacklisted=False reputation=0.55 age=92d score=15"}
+{"asctime": "2026-04-03 17:34:49,816", "name": "phishguard.soc", "levelname": "CRITICAL", "message": "SOC [CRITICAL] CRITICAL THREAT DETECTED (Score: 80) | URL flagged as HIGH. Action: block. Immediate attention required."}
+{"asctime": "2026-04-03 17:34:49,817", "name": "phishguard.detector", "levelname": "INFO", "message": "Analysis | http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123 | score=80 level=HIGH action=block [R:91 ML:91 TI:15 AN:0 SP:0]"}
+{"asctime": "2026-04-03 17:34:49,817", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:49] \"POST /analyze HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:53,323", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:53] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:34:59,088", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:34:59] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:03,323", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:03] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:09,074", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:09] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:13,324", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:13] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:19,080", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:19] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:23,320", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:23] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:28,846", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:28] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:28,847", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:28] \"GET /api/soc/events?limit=30 HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:29,074", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:29] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:31,425", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:31] \"GET /api/soc/events?limit=30&severity=CRITICAL HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:32,002", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:32] \"GET /api/soc/events?limit=30&severity=WARNING HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:32,547", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:32] \"GET /api/soc/events?limit=30&severity=INFO HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:33,316", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:33] \"GET /api/soc/events?limit=30 HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:33,318", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:33] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:39,074", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:39] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:39,703", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:39] \"GET /api/quiz/generate?difficulty=medium&count=5 HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:42,179", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:42] \"POST /api/quiz/evaluate HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:43,318", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:43] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:46,303", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:46] \"POST /api/quiz/evaluate HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:49,077", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:49] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:49,556", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:49] \"POST /api/quiz/evaluate HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:52,278", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:52] \"POST /api/quiz/evaluate HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:53,321", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:53] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:35:59,074", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:35:59] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:36:03,321", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:36:03] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:36:09,074", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:36:09] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:36:13,331", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:36:13] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:36:19,080", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:36:19] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}
+{"asctime": "2026-04-03 17:36:23,318", "name": "werkzeug", "levelname": "INFO", "message": "127.0.0.1 - - [03/Apr/2026 17:36:23] \"GET /api/soc/threat-level HTTP/1.1\" 200 -"}

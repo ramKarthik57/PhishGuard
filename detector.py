@@ -202,6 +202,7 @@ class PhishGuardDetector:
         session_id: Optional[str] = None,
         behavior_tracker=None,
         soc_logger=None,
+        extension_metadata: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         Full analysis pipeline:
@@ -265,6 +266,22 @@ class PhishGuardDetector:
              triggered_rules.extend(spoof_report.details)
              triggered_ids.append("brand_spoofing")
 
+        # ── 6.5 Live Page Scanning (Extension) ──
+        page_bonus = 0
+        if extension_metadata:
+            ext_meta = extension_metadata
+            if ext_meta.get("insecure_password_field"):
+                page_bonus += 35
+                triggered_rules.append("Insecure password field detected (HTTP + Password Form)")
+                triggered_ids.append("insecure_password_form")
+            
+            # Penalize forms posting to external sources
+            ext_forms = ext_meta.get("external_forms_count", 0)
+            if ext_forms > 0:
+                page_bonus += 15
+                triggered_rules.append(f"Forms sending data to external domains ({ext_forms} found)")
+                triggered_ids.append("external_form_action")
+
         # ── 7. Weighted Score Blending ──
         blended = (
             rule_score * config.scoring.RULE_WEIGHT +
@@ -272,7 +289,8 @@ class PhishGuardDetector:
             intel_score * config.scoring.INTEL_WEIGHT +
             anomaly_score * config.scoring.ANOMALY_WEIGHT +
             email_bonus +
-            spoof_bonus
+            spoof_bonus +
+            page_bonus
         )
 
         # ── 8. Behavior Tracking ──
@@ -351,15 +369,16 @@ class PhishGuardDetector:
                 "threat_intel": round(intel_score * config.scoring.INTEL_WEIGHT, 1),
                 "anomaly": round(anomaly_score * config.scoring.ANOMALY_WEIGHT, 1),
                 "email_bonus": email_bonus,
-                "context_bonus": spoof_bonus, # ADDED
+                "context_bonus": spoof_bonus,
+                "page_bonus": page_bonus,
                 "behavior_bonus": behavior_data.get("escalation_bonus", 0) if behavior_data else 0,
             },
         }
 
         logger.info(
-            "Analysis | %s | score=%d level=%s action=%s [R:%.0f ML:%.0f TI:%.0f AN:%.0f SP:%.0f]",
+            "Analysis | %s | score=%d level=%s action=%s [R:%.0f ML:%.0f TI:%.0f AN:%.0f SP:%.0f PG:%.0f]",
             url, final_score, level.value, action,
-            rule_score, ml_score, intel_score, anomaly_score, spoof_bonus
+            rule_score, ml_score, intel_score, anomaly_score, spoof_bonus, page_bonus
         )
         return result
 

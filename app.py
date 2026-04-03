@@ -111,6 +111,7 @@ def analyze():
         return jsonify({"error": "URL is required."}), 400
 
     email_body = (data.get("email_body") or "").strip() or None
+    ext_metadata = data.get("extension_metadata")
     sid = get_session_id()
 
     logger.info("Analyzing URL: %s (session: %s)", url, sid[:8])
@@ -122,6 +123,7 @@ def analyze():
         session_id=sid,
         behavior_tracker=behavior_tracker,
         soc_logger=soc,
+        extension_metadata=ext_metadata,
     )
 
     # VirusTotal enrichment (best-effort)

@@ -1,0 +1,92 @@
+2026-04-03 16:00:18,436 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 16:00:18,436 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 16:00:18,436 | INFO    | phishguard.app | PhishGuard detector initialized.
+2026-04-03 16:00:18,452 | INFO    | werkzeug | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-03 16:00:18,452 | INFO    | werkzeug | [33mPress CTRL+C to quit[0m
+2026-04-03 16:00:18,463 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 16:00:19,886 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 16:00:19,886 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 16:00:19,886 | INFO    | phishguard.app | PhishGuard detector initialized.
+2026-04-03 16:00:19,891 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 16:00:19,894 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 16:00:47,573 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:00:47] "GET / HTTP/1.1" 200 -
+2026-04-03 16:00:47,688 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:00:47] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-04-03 16:00:47,689 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:00:47] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-04-03 16:00:47,801 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:00:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-04-03 16:01:00,322 | INFO    | phishguard.app | Analyzing URL: http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123
+2026-04-03 16:01:00,359 | INFO    | phishguard.app | Result: score=100 level=HIGH action=block
+2026-04-03 16:01:00,360 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:01:00] "POST /analyze HTTP/1.1" 200 -
+2026-04-03 16:02:01,711 | INFO    | phishguard.app | Analyzing URL: http://secure-login.suspicious-bank.xyz/verify
+2026-04-03 16:02:01,712 | INFO    | phishguard.app | Result: score=83 level=HIGH action=block
+2026-04-03 16:02:01,712 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:02:01] "POST /analyze HTTP/1.1" 200 -
+2026-04-03 16:02:26,506 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:02:26] "GET / HTTP/1.1" 200 -
+2026-04-03 16:02:26,528 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:02:26] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2026-04-03 16:02:26,532 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:02:26] "[36mGET /static/js/app.js HTTP/1.1[0m" 304 -
+2026-04-03 16:02:44,591 | INFO    | phishguard.app | Analyzing URL: http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123
+2026-04-03 16:02:44,592 | INFO    | phishguard.app | Result: score=100 level=HIGH action=block
+2026-04-03 16:02:44,593 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:02:44] "POST /analyze HTTP/1.1" 200 -
+2026-04-03 16:05:33,751 | INFO    | werkzeug |  * Detected change in 'C:\\Users\\Ram\\Desktop\\PhishGuard\\config.py', reloading
+2026-04-03 16:32:04,669 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 16:32:04,669 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 16:32:04,669 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services.
+2026-04-03 16:32:04,669 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 16:32:04,670 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 16:32:04,695 | INFO    | werkzeug | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-04-03 16:32:04,696 | INFO    | werkzeug | [33mPress CTRL+C to quit[0m
+2026-04-03 16:32:04,707 | INFO    | werkzeug |  * Restarting with watchdog (windowsapi)
+2026-04-03 16:32:06,149 | INFO    | phishguard.model | Model loaded ← C:\Users\Ram\Desktop\PhishGuard\artifacts\phishguard_model.pkl
+2026-04-03 16:32:06,149 | INFO    | phishguard.detector | ML model loaded successfully.
+2026-04-03 16:32:06,149 | INFO    | phishguard.detector | PhishGuard Detector v2 initialized with all services.
+2026-04-03 16:32:06,149 | INFO    | phishguard.soc | SOC [INFO] PhishGuard Engine Started | Detection engine initialized. All services operational.
+2026-04-03 16:32:06,149 | INFO    | phishguard.app | PhishGuard v2 initialized with all services.
+2026-04-03 16:32:06,157 | WARNING | werkzeug |  * Debugger is active!
+2026-04-03 16:32:06,160 | INFO    | werkzeug |  * Debugger PIN: 114-614-812
+2026-04-03 16:32:21,304 | INFO    | phishguard.app | Analyzing URL: http://secure-login.suspicious-bank.xyz/verify (session: b863fac1)
+2026-04-03 16:32:21,324 | INFO    | phishguard.threat_intel | ThreatIntel | suspicious-bank.xyz | blacklisted=False reputation=0.45 age=38d score=2
+2026-04-03 16:32:21,325 | WARNING | phishguard.soc | SOC [WARNING] Suspicious URL Detected (Score: 62) | URL shows phishing indicators. Level: HIGH. Action: block.
+2026-04-03 16:32:21,325 | INFO    | phishguard.detector | Analysis | http://secure-login.suspicious-bank.xyz/verify | score=62 level=HIGH action=block [R:63 ML:100 TI:2 AN:0]
+2026-04-03 16:32:21,326 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:32:21] "POST /analyze HTTP/1.1" 200 -
+2026-04-03 16:32:39,239 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:32:39] "POST /api/simulate HTTP/1.1" 200 -
+2026-04-03 16:32:41,450 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:32:41] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:33:18,870 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:18] "GET / HTTP/1.1" 200 -
+2026-04-03 16:33:18,995 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:18] "GET /static/js/app.js HTTP/1.1" 200 -
+2026-04-03 16:33:18,998 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:18] "GET /static/css/style.css HTTP/1.1" 200 -
+2026-04-03 16:33:29,076 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:33:31,366 | INFO    | phishguard.app | Analyzing URL: http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123 (session: 08385352)
+2026-04-03 16:33:31,368 | INFO    | phishguard.threat_intel | ThreatIntel | 192.168.1.1 | blacklisted=False reputation=0.55 age=92d score=15
+2026-04-03 16:33:31,368 | CRITICAL | phishguard.soc | SOC [CRITICAL] CRITICAL THREAT DETECTED (Score: 83) | URL flagged as HIGH. Action: block. Immediate attention required.
+2026-04-03 16:33:31,368 | INFO    | phishguard.detector | Analysis | http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123 | score=83 level=HIGH action=block [R:91 ML:100 TI:15 AN:0]
+2026-04-03 16:33:31,369 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:31] "POST /analyze HTTP/1.1" 200 -
+2026-04-03 16:33:39,079 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:33:49,077 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:33:52,303 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:52] "GET /api/soc/events?limit=30 HTTP/1.1" 200 -
+2026-04-03 16:33:52,307 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:52] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:33:59,074 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:33:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:34:09,079 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:34:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:34:19,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:34:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:34:29,087 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:34:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:34:38,400 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:34:38] "POST /api/simulate HTTP/1.1" 200 -
+2026-04-03 16:34:39,084 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:34:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:34:49,085 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:34:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:34:59,085 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:34:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:35:09,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:35:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:35:19,078 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:35:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:35:29,080 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:35:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:35:39,075 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:35:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:35:41,394 | INFO    | phishguard.app | Analyzing URL: http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123 (session: 08385352)
+2026-04-03 16:35:41,395 | CRITICAL | phishguard.soc | SOC [CRITICAL] CRITICAL THREAT DETECTED (Score: 83) | URL flagged as HIGH. Action: block. Immediate attention required.
+2026-04-03 16:35:41,396 | INFO    | phishguard.detector | Analysis | http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123 | score=83 level=HIGH action=block [R:91 ML:100 TI:15 AN:0]
+2026-04-03 16:35:41,396 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:35:41] "POST /analyze HTTP/1.1" 200 -
+2026-04-03 16:35:49,077 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:35:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:35:59,077 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:35:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:36:09,073 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:36:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:36:19,086 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:36:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:36:29,085 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:36:29] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:36:39,085 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:36:39] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:36:49,073 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:36:49] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:36:59,083 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:36:59] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:37:09,082 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:37:09] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:37:19,081 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:37:19] "GET /api/soc/threat-level HTTP/1.1" 200 -
+2026-04-03 16:37:29,077 | INFO    | werkzeug | 127.0.0.1 - - [03/Apr/2026 16:37:29] "GET /api/soc/threat-level HTTP/1.1" 200 -

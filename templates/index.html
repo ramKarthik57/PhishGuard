@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PhishGuard v2 — AI-powered phishing detection with threat intelligence, explainable AI, and SOC-style monitoring.">
+    <title>PhishGuard v2 — SOC Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow--1"></div>
+    <div class="bg-glow bg-glow--2"></div>
+    <div class="bg-glow bg-glow--3"></div>
+
+    <!-- ═══ Header ═══ -->
+    <header class="header">
+        <div class="header__brand">
+            <div class="header__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="header__title">PhishGuard <span class="header__version">v2</span></h1>
+                <p class="header__subtitle">AI-Powered Threat Intelligence Platform</p>
+            </div>
+        </div>
+        <div class="header__right">
+            <div class="threat-indicator" id="threat-indicator">
+                <div class="threat-indicator__dot"></div>
+                <span class="threat-indicator__label">NORMAL</span>
+            </div>
+            <div class="header__status">
+                <span class="status-dot"></span>
+                <span class="status-text">Online</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ Tab Navigation ═══ -->
+    <nav class="tab-nav" id="tab-nav">
+        <button class="tab-btn active" data-tab="analyze">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Analyze
+        </button>
+        <button class="tab-btn" data-tab="soc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            SOC Monitor
+        </button>
+        <button class="tab-btn" data-tab="simulator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            Simulator
+        </button>
+    </nav>
+
+    <main class="main">
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB: Analyze                                -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="tab-panel active" id="panel-analyze">
+
+            <!-- Input Card -->
+            <section class="card card--input" id="input-section">
+                <div class="card__header">
+                    <h2 class="card__title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        Threat Analysis
+                    </h2>
+                    <p class="card__desc">Enter a suspicious URL and optional email content for comprehensive multi-engine analysis.</p>
+                </div>
+                <form id="analyze-form" class="form">
+                    <div class="form__group">
+                        <label for="url-input" class="form__label">Suspicious URL</label>
+                        <div class="form__input-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="form__icon"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            <input type="text" id="url-input" class="form__input" placeholder="e.g. http://secure-login.suspicious-bank.xyz/verify" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="form__group">
+                        <label for="email-input" class="form__label">Email Body <span class="form__optional">(optional)</span></label>
+                        <textarea id="email-input" class="form__textarea" rows="3" placeholder="Paste suspicious email content here..."></textarea>
+                    </div>
+                    <button type="submit" id="analyze-btn" class="btn btn--primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn__icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span class="btn__text">Analyze Threat</span>
+                        <div class="btn__loader" hidden><div class="spinner"></div></div>
+                    </button>
+                </form>
+                <div class="quick-tests">
+                    <span class="quick-tests__label">Quick tests:</span>
+                    <button class="chip chip--safe" data-url="https://www.google.com/search?q=python" data-email="">Safe</button>
+                    <button class="chip chip--warn" data-url="http://secure-login-verify.update-bank.xyz/account/confirm?id=8a3f" data-email="Dear Customer, your account will be suspended. Click here to verify immediately.">Suspicious</button>
+                    <button class="chip chip--danger" data-url="http://192.168.1.1/@admin/login/verify-credential/update.html?token=abc123" data-email="URGENT: confirm your identity within 24 hours or your credit card will be locked out.">Malicious</button>
+                </div>
+            </section>
+
+            <!-- Results -->
+            <section class="card card--result hidden" id="result-section">
+                <div class="card__header">
+                    <h2 class="card__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Analysis Report</h2>
+                </div>
+
+                <!-- Gauge + Confidence -->
+                <div class="gauge-row">
+                    <div class="gauge-container">
+                        <div class="gauge">
+                            <svg viewBox="0 0 200 120" class="gauge__svg">
+                                <path d="M 20 100 A 80 80 0 0 1 180 100" class="gauge__track"/>
+                                <path d="M 20 100 A 80 80 0 0 1 180 100" class="gauge__fill" id="gauge-fill"/>
+                            </svg>
+                            <div class="gauge__value" id="gauge-value">0</div>
+                            <div class="gauge__label">RISK SCORE</div>
+                        </div>
+                        <div class="risk-badge" id="risk-badge">LOW</div>
+                    </div>
+                    <div class="confidence-card" id="confidence-card">
+                        <div class="confidence-card__pct" id="confidence-pct">--</div>
+                        <div class="confidence-card__label">AI Confidence</div>
+                        <div class="confidence-card__note" id="confidence-note"></div>
+                    </div>
+                </div>
+
+                <!-- Action -->
+                <div class="action-banner" id="action-banner">
+                    <div class="action-banner__icon" id="action-icon"></div>
+                    <div class="action-banner__text">
+                        <span class="action-banner__label">Recommended Action</span>
+                        <span class="action-banner__action" id="action-text">ALLOW</span>
+                    </div>
+                </div>
+
+                <!-- Scoring Breakdown -->
+                <div class="detail-section" id="breakdown-section">
+                    <h3 class="detail-section__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon icon--sm"><path d="M18 20V10M12 20V4M6 20v-6"/></svg> Scoring Breakdown</h3>
+                    <div class="breakdown-bars" id="breakdown-bars"></div>
+                </div>
+
+                <!-- Triggered Rules -->
+                <div class="detail-section" id="rules-section">
+                    <h3 class="detail-section__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon icon--sm"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Triggered Rules</h3>
+                    <ul class="rule-list" id="rule-list"></ul>
+                </div>
+
+                <!-- Explainable AI -->
+                <div class="detail-section" id="explain-section">
+                    <h3 class="detail-section__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon icon--sm"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> AI Explanation</h3>
+                    <div class="explain-summary" id="explain-summary"></div>
+                    <div class="evidence-chain" id="evidence-chain"></div>
+                </div>
+
+                <!-- Threat Intel -->
+                <div class="detail-section" id="intel-section">
+                    <h3 class="detail-section__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon icon--sm"><path d="M21 12a9 9 0 1 1-9-9 4.5 4.5 0 0 0 0 9 4.5 4.5 0 0 1 0 9"/></svg> Threat Intelligence</h3>
+                    <div class="intel-grid" id="intel-grid"></div>
+                </div>
+
+                <!-- Email Flags -->
+                <div class="detail-section hidden" id="email-section">
+                    <h3 class="detail-section__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon icon--sm"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Email Red Flags</h3>
+                    <ul class="rule-list rule-list--email" id="email-list"></ul>
+                </div>
+
+                <!-- Behavior -->
+                <div class="detail-section hidden" id="behavior-section">
+                    <h3 class="detail-section__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon icon--sm"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Session Behavior</h3>
+                    <div class="behavior-info" id="behavior-info"></div>
+                </div>
+
+                <!-- VirusTotal -->
+                <div class="detail-section" id="vt-section">
+                    <h3 class="detail-section__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon icon--sm"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg> VirusTotal</h3>
+                    <div class="vt-result" id="vt-result"></div>
+                </div>
+
+                <!-- Meta -->
+                <div class="meta-bar" id="meta-bar">
+                    <span class="meta-bar__item" id="meta-fingerprint"></span>
+                    <span class="meta-bar__item" id="meta-timestamp"></span>
+                </div>
+            </section>
+
+            <!-- History -->
+            <section class="card card--history" id="history-section">
+                <div class="card__header">
+                    <h2 class="card__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Scan History</h2>
+                </div>
+                <div class="history-list" id="history-list">
+                    <p class="history-empty">No scans yet. Analyze a URL to get started.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB: SOC Monitor                            -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="tab-panel" id="panel-soc">
+
+            <!-- Threat Level Overview -->
+            <section class="card">
+                <div class="card__header">
+                    <h2 class="card__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Security Operations Center</h2>
+                    <p class="card__desc">Real-time monitoring, threat level tracking, and alert management.</p>
+                </div>
+                <div class="soc-stats-grid" id="soc-stats-grid">
+                    <div class="soc-stat-card" id="soc-threat-card">
+                        <div class="soc-stat-card__label">Threat Level</div>
+                        <div class="soc-stat-card__value" id="soc-threat-label">NORMAL</div>
+                    </div>
+                    <div class="soc-stat-card">
+                        <div class="soc-stat-card__label">Total Events</div>
+                        <div class="soc-stat-card__value" id="soc-total-events">0</div>
+                    </div>
+                    <div class="soc-stat-card">
+                        <div class="soc-stat-card__label">Critical Alerts</div>
+                        <div class="soc-stat-card__value soc-stat-card__value--critical" id="soc-critical-count">0</div>
+                    </div>
+                    <div class="soc-stat-card">
+                        <div class="soc-stat-card__label">Warnings</div>
+                        <div class="soc-stat-card__value soc-stat-card__value--warning" id="soc-warning-count">0</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Event Feed -->
+            <section class="card">
+                <div class="card__header card__header--row">
+                    <h2 class="card__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Live Event Feed</h2>
+                    <div class="filter-pills">
+                        <button class="filter-pill active" data-severity="all">All</button>
+                        <button class="filter-pill" data-severity="CRITICAL">Critical</button>
+                        <button class="filter-pill" data-severity="WARNING">Warning</button>
+                        <button class="filter-pill" data-severity="INFO">Info</button>
+                    </div>
+                </div>
+                <div class="event-feed" id="event-feed">
+                    <p class="history-empty">No events recorded yet.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- TAB: Simulator                              -->
+        <!-- ═══════════════════════════════════════════ -->
+        <div class="tab-panel" id="panel-simulator">
+            <section class="card">
+                <div class="card__header">
+                    <h2 class="card__title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> Phishing Simulation Mode</h2>
+                    <p class="card__desc">Generate realistic phishing samples for security awareness training and engine testing.</p>
+                </div>
+                <div class="sim-controls">
+                    <div class="form__group">
+                        <label class="form__label">Difficulty Level</label>
+                        <div class="sim-difficulty" id="sim-difficulty">
+                            <button class="chip chip--safe active" data-diff="easy">Easy</button>
+                            <button class="chip chip--warn" data-diff="medium">Medium</button>
+                            <button class="chip chip--danger" data-diff="hard">Hard</button>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary" id="sim-generate-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn__icon"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        Generate Samples
+                    </button>
+                </div>
+                <div class="sim-results" id="sim-results"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>PhishGuard v2.0 &mdash; AI-Powered Threat Intelligence Platform</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
